@@ -204,7 +204,7 @@ function getTemplate () {
         fileName,
         dirName,
         date,
-        Migration.TemplateType.DEFAULT_SQL,
+        Migration.TemplateType.SQL_UP,
         internals
       );
 
@@ -213,7 +213,7 @@ function getTemplate () {
 
         function (done) {
           var actual = migration.getTemplate();
-          Code.expect(actual).to.equal(migration.defaultSqlTemplate());
+          Code.expect(actual).to.equal(migration.sqlUpTemplate());
           done();
         }
       );
