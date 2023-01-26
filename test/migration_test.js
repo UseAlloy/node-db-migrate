@@ -199,21 +199,41 @@ function getTemplate () {
       );
     });
 
-    lab.experiment('as default sql', function () {
+    lab.experiment('as up sql', function () {
       var migration = new Migration(
         fileName,
         dirName,
         date,
-        Migration.TemplateType.DEFAULT_SQL,
+        Migration.TemplateType.SQL_UP,
         internals
       );
 
       lab.test(
-        'should return default sql template',
+        'should return up sql template',
 
         function (done) {
           var actual = migration.getTemplate();
-          Code.expect(actual).to.equal(migration.defaultSqlTemplate());
+          Code.expect(actual).to.equal(migration.upSqlTemplate());
+          done();
+        }
+      );
+    });
+
+    lab.experiment('as down sql', function () {
+      var migration = new Migration(
+        fileName,
+        dirName,
+        date,
+        Migration.TemplateType.SQL_DOWN,
+        internals
+      );
+
+      lab.test(
+        'should return down sql template',
+
+        function (done) {
+          var actual = migration.getTemplate();
+          Code.expect(actual).to.equal(migration.downSqlTemplate());
           done();
         }
       );
